@@ -507,4 +507,27 @@ document.addEventListener("DOMContentLoaded", () => {
   // Attach scroll listener
   window.addEventListener("scroll", onScroll);
   onScroll(); // run once on load
+
+  // ══════════════════════════════════════════
+  //  5. CONTACT FORM — submit handler
+  // ══════════════════════════════════════════
+  const contactForm = document.getElementById("contact-form");
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // No backend — prevent page reload
+
+    // Show success message
+    const existingMsg = contactForm.querySelector(".contact__success");
+    if (existingMsg) existingMsg.remove();
+
+    const successMsg = document.createElement("div");
+    successMsg.className = "contact__success";
+    successMsg.textContent = "// Message sent successfully!";
+    contactForm.appendChild(successMsg);
+
+    // Reset form fields
+    contactForm.reset();
+
+    // Remove success message after 4 seconds
+    setTimeout(() => successMsg.remove(), 4000);
+  });
 });
