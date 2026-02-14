@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rayan Mudhayiq - Software Engineer</title>
+  <meta name="description"
+    content="Software engineer excelling in full stack app development, software design, and UI/UX" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       BACKGROUND LAYERS
+       ═══════════════════════════════════════════ -->
+
+  <!-- Gradient Orbs (fixed) -->
+  <div class="gradient-orbs">
+    <div class="orb orb--1"></div>
+    <div class="orb orb--2"></div>
+    <div class="orb orb--3"></div>
+    <div class="orb orb--4"></div>
+    <div class="orb orb--5"></div>
+    <div class="grid-overlay grid-pattern"></div>
+  </div>
+
+  <!-- Background Code Panel (fixed, slides out on scroll) -->
+  <div class="bg-code" id="bg-code">
+    <div class="bg-code__inner">
+      <pre><code id="bg-code-content"></code><span class="bg-code__cursor" id="bg-code-cursor"></span></pre>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+       ═══════════════════════════════════════════ -->
+  <nav class="navbar">
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="navbar__links" id="navbar-links">
+      <li>
+        <a class="navbar__link" href="#" data-name="Home">
+          <span class="navbar__link-inner">
+            <span class="navbar__bracket navbar__bracket--left">[</span>
+            <span class="navbar__bracket navbar__bracket--right">]</span>
+            <span class="navbar__label">Home</span>
+            <span class="navbar__cursor"></span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="navbar__link" href="#about" data-name="About">
+          <span class="navbar__link-inner">
+            <span class="navbar__bracket navbar__bracket--left">[</span>
+            <span class="navbar__bracket navbar__bracket--right">]</span>
+            <span class="navbar__label">About</span>
+            <span class="navbar__cursor"></span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="navbar__link" href="#work" data-name="Work">
+          <span class="navbar__link-inner">
+            <span class="navbar__bracket navbar__bracket--left">[</span>
+            <span class="navbar__bracket navbar__bracket--right">]</span>
+            <span class="navbar__label">Work</span>
+            <span class="navbar__cursor"></span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="navbar__link" href="#contact" data-name="Contact">
+          <span class="navbar__link-inner">
+            <span class="navbar__bracket navbar__bracket--left">[</span>
+            <span class="navbar__bracket navbar__bracket--right">]</span>
+            <span class="navbar__label">Contact</span>
+            <span class="navbar__cursor"></span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════ -->
+  <main class="relative z-10 w-full">
+
+    <!-- ── Hero Section ── -->
+    <section class="relative min-h-screen w-full">
+      <div class="hero" id="hero">
+        <!-- Background glow -->
+        <div class="hero__glow" id="hero-glow"></div>
+
+        <!-- Name (types in via JS) -->
+        <h1 class="hero__name" id="hero-name"></h1>
+
+        <!-- Description (types in after name) -->
+        <p class="hero__description" id="hero-description" style="display:none;"></p>
+      </div>
+    </section>
+
+    <!-- ── About Section ── -->
+    <section id="about" class="about">
+      <div class="about__inner">
+        <!-- Header -->
+        <div class="about__header">
+          <h2 class="about__title">
+            <span class="bracket">[</span>
+            <span class="label"> About Me </span>
+            <span class="bracket">]</span>
+          </h2>
+          <div class="about__accent-line"></div>
+        </div>
+
+        <!-- IDE-style block -->
+        <div class="relative">
+          <div class="about__glow"></div>
+
+          <div class="about__content">
+            <!-- Line Numbers -->
+            <div class="line-numbers">
+              <div class="line-number">01</div>
+              <div class="line-number">02</div>
+              <div class="line-number">03</div>
+              <div class="line-number line-number--skills">04</div>
+            </div>
+
+            <!-- Indent Guide -->
+            <div class="indent-guide"></div>
+
+            <!-- Text Content -->
+            <div class="about__text">
+              <div class="about__text-block">
+                <p class="about__paragraph">
+                  Hi, I'm Rayan Mudhayiq, a passionate software engineer with a love for creating elegant solutions to
+                  complex problems. With expertise spanning full-stack development, I specialize in building scalable
+                  applications that deliver exceptional user experiences.
+                </p>
+                <p class="about__paragraph">
+                  My journey in software development has equipped me with a diverse skill set that includes modern web
+                  technologies, mobile development, and cloud architecture. I thrive on transforming ideas into reality
+                  through clean, maintainable code and thoughtful design.
+                </p>
+                <p class="about__paragraph">
+                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects,
+                  or sharing knowledge with the developer community. I believe in continuous learning and staying at the
+                  forefront of technological innovation.
+                </p>
+
+                <!-- Skills -->
+                <div class="skills">
+                  <h3 class="skills__title">
+                    <span class="bracket">&lt;</span>
+                    <span> Skills </span>
+                    <span class="bracket">/&gt;</span>
+                  </h3>
+                  <div class="skills__grid">
+                    <div class="skill-badge"><span>React &amp; Next.js</span></div>
+                    <div class="skill-badge"><span>TypeScript</span></div>
+                    <div class="skill-badge"><span>Node.js</span></div>
+                    <div class="skill-badge"><span>Flutter &amp; Dart</span></div>
+                    <div class="skill-badge"><span>UI/UX Design</span></div>
+                    <div class="skill-badge"><span>Cloud Architecture</span></div>
+                    <div class="skill-badge"><span>Database Design</span></div>
+                    <div class="skill-badge"><span>API Development</span></div>
+                    <div class="skill-badge"><span>Agile Methodologies</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Work Section ── -->
+    <section id="work" class="work">
+      <div class="work__inner">
+        <!-- Header -->
+        <div class="work__header">
+          <h2 class="work__title">
+            <span class="bracket">{</span>
+            <span class="label"> Work </span>
+            <span class="bracket">}</span>
+          </h2>
+          <div class="work__accent-line"></div>
+        </div>
+
+        <!-- IDE-style block -->
+        <div class="relative">
+          <div class="work__glow"></div>
+
+          <div class="work__content">
+            <!-- Line Numbers -->
+            <div class="work__line-numbers">
+              <div class="work__line-number">01</div>
+              <div class="work__line-number">02</div>
+              <div class="work__line-number">03</div>
+            </div>
+
+            <!-- Indent Guide -->
+            <div class="work__indent-guide"></div>
+
+            <!-- Projects -->
+            <div class="work__body">
+              <div class="projects-grid">
+
+                <!-- Project 1: KFUPM World App -->
+                <div class="project-card">
+                  <div class="project-card__inner">
+                    <span class="project-card__badge">Mobile</span>
+                    <h3 class="project-card__title">KFUPM World – The Global Student Experience Platform</h3>
+                    <p class="project-card__description">A comprehensive mobile solution designed to centralize the
+                      KFUPM student experience. The app facilitates cultural exchange by managing event tracks—including
+                      Arts, Tourism, and Entertainment—while providing essential academic tools like schedule tracking,
+                      GPA visualization, and digital attendance via QR integration.</p>
+                    <div class="project-card__tech">
+                      <span class="tech-tag">Flutter</span>
+                      <span class="tech-tag">Dart</span>
+                      <span class="tech-tag">Firebase</span>
+                      <span class="tech-tag">QR Integration</span>
+                    </div>
+                    <div class="project-card__glow-line"></div>
+                  </div>
+                </div>
+
+                <!-- Project 2: Voluntary Work Unit Website -->
+                <div class="project-card">
+                  <div class="project-card__inner">
+                    <span class="project-card__badge">Web</span>
+                    <h3 class="project-card__title">Voluntary Work Unit – Digital Impact Hub</h3>
+                    <p class="project-card__description">A centralized web platform dedicated to fostering a culture of
+                      social responsibility at KFUPM. The site streamlines the management of large-scale initiatives by
+                      connecting students with specialized opportunities in health, environment, and social welfare,
+                      coordinating with over 20+ partner organizations.</p>
+                    <div class="project-card__tech">
+                      <span class="tech-tag">Next.js</span>
+                      <span class="tech-tag">React</span>
+                      <span class="tech-tag">Node.js</span>
+                      <span class="tech-tag">MongoDB</span>
+                    </div>
+                    <div class="project-card__glow-line"></div>
+                  </div>
+                </div>
+
+                <!-- Project 3: Venture Craft Website -->
+                <div class="project-card">
+                  <div class="project-card__inner">
+                    <span class="project-card__badge">Web</span>
+                    <h3 class="project-card__title">Venture Craft – Deep-Tech Startup Ecosystem</h3>
+                    <p class="project-card__description">An international competition and resource platform designed to
+                      transform lab-based research into scalable market ventures. The website facilitates the
+                      commercialization journey for deep-tech founders, providing access to mentorship, seed funding,
+                      and pitch-readiness tools.</p>
+                    <div class="project-card__tech">
+                      <span class="tech-tag">Next.js</span>
+                      <span class="tech-tag">TypeScript</span>
+                      <span class="tech-tag">REST API</span>
+                      <span class="tech-tag">Tailwind</span>
+                    </div>
+                    <div class="project-card__glow-line"></div>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Contact Section ── -->
+    <section id="contact" class="contact">
+      <div class="contact__inner">
+        <!-- Header -->
+        <div class="contact__header">
+          <h2 class="contact__title">
+            <span class="bracket">&lt;</span>
+            <span class="label"> Contact </span>
+            <span class="bracket">/&gt;</span>
+          </h2>
+          <div class="contact__accent-line"></div>
+        </div>
+
+        <!-- IDE-style block -->
+        <div class="relative">
+          <div class="contact__glow"></div>
+
+          <div class="contact__content">
+            <!-- Line Numbers -->
+            <div class="contact__line-numbers">
+              <div class="contact__line-number">01</div>
+              <div class="contact__line-number">02</div>
+            </div>
+
+            <!-- Indent Guide -->
+            <div class="contact__indent-guide"></div>
+
+            <!-- Contact Info -->
+            <div class="contact__body">
+              <div class="contact__item">
+                <span class="contact__key">email</span>
+                <span class="contact__colon">:</span>
+                <a href="mailto:rayanmodiq@gmail.com" class="contact__value">"rayanmodiq@gmail.com"</a>
+              </div>
+              <div class="contact__item">
+                <span class="contact__key">phone</span>
+                <span class="contact__colon">:</span>
+                <a href="tel:0538406942" class="contact__value">"0538406942"</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
