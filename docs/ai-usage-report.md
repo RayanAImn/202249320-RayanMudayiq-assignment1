@@ -1,5 +1,9 @@
 # AI Usage Report
 
+## Background
+
+The portfolio website was already designed, developed, and fully functional before any AI tools were involved. The original version was built using **Next.js**, **React**, and **Tailwind CSS**. AI was then used to **refactor and convert** the existing codebase into native **HTML**, **CSS**, and **JavaScript** to meet the assignment requirements — the design, content, and structure are entirely original work.
+
 ## Tools Used & Use Cases
 
 | Tool | Use Case |

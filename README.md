@@ -12,8 +12,9 @@ This is a responsive, single-page portfolio website styled as an IDE/code-editor
 - **Scroll-driven effects**: parallax fade-out, section fade-in, background code reveal
 - **Syntax-highlighted** Dart code background panel
 - **Animated gradient orbs** background
-- **IDE-styled** About, Work, and Contact sections with line numbers and indent guides
-- **Responsive** design with hamburger menu for mobile
+- **IDE-styled** About, Projects, and Contact sections with line numbers and indent guides
+- **Project showcase** with floating screenshots for web and mobile projects
+- **Fully responsive** design with hamburger menu and mobile-optimized project cards
 - **Contact form** with Name, Email, and Message fields
 - **Skills grid** with hover glow effects
 
@@ -45,6 +46,11 @@ assignment-1/
 │   └── script.js
 ├── assets/
 │   └── images/
+│       ├── kfupm_world1.png
+│       ├── kfupm_world2.png
+│       ├── kfupm_world3.png
+│       ├── kvwu.png
+│       └── venture_carft.png
 ├── docs/
 │   ├── ai-usage-report.md
 │   └── technical-documentation.md
