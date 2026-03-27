@@ -44,3 +44,45 @@ The portfolio website was already designed, developed, and fully functional befo
 - **Modifications made**: Adjusted color values, spacing, and animation timing to match the original design. Restructured CSS organization for clarity. Added meaningful comments to explain code purpose.
 - **Understanding verified**: Each feature (typing animation, scroll parallax, syntax highlighting, form handling) was understood conceptually before accepting AI suggestions.
 - **Originality**: The overall design concept, project content, and section structure are original work. AI was used as an implementation accelerator, not as the creative source.
+
+---
+
+## Assignment 2: Interactive Features
+
+The interactive features introduced in Assignment 2 (Data Validation, Local Storage, API fetching, and DOM filtering) were implemented manually. AI tools were used strictly as an assistant to suggest syntax, troubleshoot layout quirks, and recommend best practices, rather than generating the codebase.
+
+### Tools Used & Use Cases
+
+| Tool | Use Case |
+|------|----------|
+| **Claude (Anthropic)** | Problem-solving for smooth CSS transitions, regex formulation, and explaining `async/await` error handling patterns. |
+| **GitHub Copilot** | Inline code completion for repetitive variable declarations and `addEventListener` boilerplate. |
+
+### Specific Uses
+
+- **API Integration**: Used AI to understand the syntax for implementing an asynchronous `fetch` request, specifically how to handle gracefully falling back to a default string when the Advice Slip API request fails.
+- **Local Storage Drafts**: Consulted AI on the best event listeners (`input` vs `change`) to use when autosaving the Contact Form data to `localStorage` in real-time.
+- **UI Interactivity**: I wrote the project filtering logic, but used AI to help debug why the project cards were snapping into place instead of transitioning smoothly. AI suggested utilizing `setTimeout` to wait for CSS opacity transitions to finish before removing elements from the flow.
+- **Form Error Handling**: Asked AI to generate and explain the regular expression used for validating email formats (`^[^\s@]+@[^\s@]+\.[^\s@]+$`). I manually integrated this regex into my own validation logic.
+
+### Benefits & Challenges
+
+#### Benefits
+- **Syntax Reference**: AI was exceptionally fast at providing the exact regex string needed for email validation, saving me from manually testing regex patterns.
+- **Animation Debugging**: AI successfully identified that adding and removing `display: none` instantly breaks CSS transitions, suggesting the `position: absolute` workaround.
+
+#### Challenges
+- **Cookie-cutter Code**: AI often tried to rewrite my entire function instead of just answering the specific logic question I asked. I had to carefully extract only the useful lines (like the `fetch` block) and discard the rest.
+- **Over-engineering**: AI suggested heavy libraries or complex observers for the toast animations. I had to reject these and insist on a simple, native CSS class-toggling approach to ensure I understood the code.
+
+### Learning Outcomes
+
+- Gained a solid understanding of Promises and the `async/await` syntax for handling asynchronous web API requests.
+- Learned the crucial difference between the DOM's physical layout flow (`position: relative` vs `absolute`) and visual visibility (`opacity`) when building CSS transitions.
+- Learned how to persist lightweight data across browser reloads using the native `localStorage` API.
+
+### Responsible Use & Modifications
+
+- **All AI suggestions were reviewed** and manually typed into the project to ensure full comprehension; copy-pasting was strictly avoided for logical blocks.
+- **Modifications made**: The AI-suggested toast notifications were heavily refactored to match the project's IDE-styling and specifically integrated into my custom frontend validation script.
+- **Understanding verified**: Every regex pattern and `fetch` parameter provided by AI was broken down and understood before being committed to the project. The core architectural flow remains entirely my own work.

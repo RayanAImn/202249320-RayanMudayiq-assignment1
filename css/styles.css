@@ -1716,3 +1716,151 @@ a {
     font-size: 13px;
   }
 }
+
+/* =============================================
+   ASSIGNMENT 2: INTERACTIVE FEATURES
+   ============================================= */
+
+/* ── Project Filter Tabs ── */
+.projects-filter {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border-primary);
+  padding-bottom: 16px;
+}
+
+.filter-tab {
+  background: transparent;
+  border: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.filter-tab:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--foreground);
+}
+
+.filter-tab--active {
+  background: rgba(0, 217, 255, 0.1);
+  border-color: #00d9ff;
+  color: #00d9ff;
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+}
+
+/* Filtering animation */
+.project-card {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.project-card.hide {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+.project-card.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  position: relative;
+  visibility: visible;
+}
+
+/* ── API Quote Container ── */
+.api-quote {
+  margin-top: 32px;
+  padding: 16px;
+  border: 1px dashed var(--border-primary);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.4);
+  max-width: 600px;
+}
+
+.api-quote__header {
+  font-size: 14px;
+  color: var(--code-comment);
+  margin-bottom: 8px;
+}
+
+.api-quote__header .bracket {
+  color: var(--code-purple);
+}
+
+.api-quote__header .label {
+  color: var(--code-yellow);
+}
+
+.api-quote__text {
+  font-size: 16px;
+  font-style: italic;
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+
+/* ── Form Error Validation ── */
+.contact__error-msg {
+  display: block;
+  font-size: 12px;
+  color: #ef4444; /* red-500 */
+  margin-top: 4px;
+  min-height: 16px;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.contact__error-msg.visible {
+  opacity: 1;
+}
+
+/* ── Toast Notifications ── */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toast {
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--foreground);
+  background: #1e293b;
+  border-left: 4px solid #3b82f6;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  transform: translateX(120%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
+}
+
+.toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.toast--success {
+  border-color: #22c55e;
+}
+
+.toast--error {
+  border-color: #ef4444;
+}
+
+.toast__content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

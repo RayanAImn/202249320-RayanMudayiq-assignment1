@@ -14,8 +14,12 @@ This is a responsive, single-page portfolio website styled as an IDE/code-editor
 - **Animated gradient orbs** background
 - **IDE-styled** About, Projects, and Contact sections with line numbers and indent guides
 - **Project showcase** with floating screenshots for web and mobile projects
+- **Dynamic Project Filtering** (Assignment 2): Filter projects dynamically by Web, Mobile, or All with smooth enter/exit animations.
+- **API Integration** (Assignment 2): Fetches and displays a random "Advice of the Day" using a public API (`fetch/async`).
 - **Fully responsive** design with hamburger menu and mobile-optimized project cards
-- **Contact form** with Name, Email, and Message fields
+- **Advanced Contact Form** (Assignment 2): Features strict real-time validation with inline warning messages.
+- **Local Storage Autosave** (Assignment 2): Automatically saves your contact form drafts to `localStorage` so messages are never lost on reload.
+- **Toast Notifications** (Assignment 2): Provides animated UI popups for successful form submissions or validation errors.
 - **Skills grid** with hover glow effects
 
 ## Setup Instructions

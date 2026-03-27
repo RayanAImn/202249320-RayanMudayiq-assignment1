@@ -395,8 +395,19 @@ document.addEventListener("DOMContentLoaded", () => {
   //  3. SCROLL HANDLER — drives multiple effects
   // ══════════════════════════════════════════
   let activeLink = "Home";
+  let isScrolling = false;
 
   function onScroll() {
+    if (!isScrolling) {
+      window.requestAnimationFrame(() => {
+        handleScrollLogic();
+        isScrolling = false;
+      });
+      isScrolling = true;
+    }
+  }
+
+  function handleScrollLogic() {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
 
@@ -421,8 +432,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ── Contact section fade-in ──
-    const contactTop2 = contactEl.offsetTop;
-    if (scrollY >= contactTop2 - windowHeight * 0.5) {
+    const contactTop = contactEl.offsetTop;
+    if (scrollY >= contactTop - windowHeight * 0.5) {
       contactEl.classList.add("contact--visible");
     }
 
@@ -432,11 +443,9 @@ document.addEventListener("DOMContentLoaded", () => {
       newActive = "Home";
     } else {
       const aboutTop = aboutEl.offsetTop;
-      const workTop2 = workEl.offsetTop;
-      const contactTop = contactEl.offsetTop;
       if (scrollY >= contactTop - 200) {
         newActive = "Contact";
-      } else if (scrollY >= workTop2 - 100) {
+      } else if (scrollY >= workTop - 100) {
         newActive = "Work";
       } else if (scrollY >= aboutTop - 100) {
         newActive = "About";
@@ -460,12 +469,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (name === activeLink) {
         bracketL.style.display = "inline";
         bracketR.style.display = "inline";
-        // Re-trigger animation
+        
+        // Re-trigger animation using requestAnimationFrame instead of forced reflow
         bracketL.style.animation = "none";
         bracketR.style.animation = "none";
-        void bracketL.offsetWidth; // force reflow
-        bracketL.style.animation = "";
-        bracketR.style.animation = "";
+        
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            bracketL.style.animation = "";
+            bracketR.style.animation = "";
+          });
+        });
 
         label.classList.add("navbar__label--active");
       } else {
@@ -509,25 +523,141 @@ document.addEventListener("DOMContentLoaded", () => {
   onScroll(); // run once on load
 
   // ══════════════════════════════════════════
-  //  5. CONTACT FORM — submit handler
+  //  5. ASSIGNMENT 2: INTERACTIVE FEATURES
   // ══════════════════════════════════════════
+  
+  // -- A. Toast Notifications --
+  function showToast(message, type = "success") {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = `toast toast--${type}`;
+    toast.innerHTML = `<div class="toast__content">
+      <span style="font-size: 18px;">${type === "success" ? "✓" : "⚠"}</span>
+      <span>${message}</span>
+    </div>`;
+    
+    container.appendChild(toast);
+    
+    setTimeout(() => toast.classList.add("show"), 10);
+    
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => toast.remove(), 400);
+    }, 4000);
+  }
+
+  // -- B. Project Filtering --
+  const filterTabs = document.querySelectorAll(".filter-tab");
+  const projectCards = document.querySelectorAll(".project-card");
+  
+  filterTabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      filterTabs.forEach(t => t.classList.remove("filter-tab--active"));
+      tab.classList.add("filter-tab--active");
+      
+      const filter = tab.dataset.filter;
+      
+      projectCards.forEach(card => {
+        if (filter === "all" || card.dataset.category === filter) {
+          card.classList.remove("hide");
+          card.classList.add("show");
+          card.style.position = "relative";
+        } else {
+          card.classList.remove("show");
+          card.classList.add("hide");
+          setTimeout(() => {
+            if(card.classList.contains("hide")) {
+                card.style.position = "absolute";
+            }
+          }, 400);
+        }
+      });
+    });
+  });
+
+  // -- C. Public API (Fun Fact / Quote) --
+  async function fetchRandomQuote() {
+    const quoteText = document.getElementById("api-quote-text");
+    try {
+      const response = await fetch("https://api.adviceslip.com/advice");
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
+      quoteText.textContent = `"${data.slip.advice}"`;
+    } catch (error) {
+      quoteText.textContent = `"The only way to do great work is to love what you do." - Fallback Quote`;
+      console.error("Failed to fetch API quote:", error);
+    }
+  }
+  fetchRandomQuote();
+
+  // -- D. Contact Form Auto-Save & Validation --
   const contactForm = document.getElementById("contact-form");
+  const nameInput = document.getElementById("contact-name");
+  const emailInput = document.getElementById("contact-email");
+  const msgInput = document.getElementById("contact-message");
+  
+  if (localStorage.getItem("contactDraft_name")) nameInput.value = localStorage.getItem("contactDraft_name");
+  if (localStorage.getItem("contactDraft_email")) emailInput.value = localStorage.getItem("contactDraft_email");
+  if (localStorage.getItem("contactDraft_msg")) msgInput.value = localStorage.getItem("contactDraft_msg");
+  
+  [nameInput, emailInput, msgInput].forEach(input => {
+    input.addEventListener("input", (e) => {
+      if(e.target.id === "contact-name") localStorage.setItem("contactDraft_name", e.target.value);
+      if(e.target.id === "contact-email") localStorage.setItem("contactDraft_email", e.target.value);
+      if(e.target.id === "contact-message") localStorage.setItem("contactDraft_msg", e.target.value);
+    });
+  });
+  
+  function showError(input, errorId, message) {
+    const errorSpan = document.getElementById(errorId);
+    if(errorSpan) {
+      errorSpan.textContent = message;
+      errorSpan.classList.add("visible");
+    }
+    input.style.borderColor = "#ef4444";
+  }
+  
+  function clearError(input, errorId) {
+    const errorSpan = document.getElementById(errorId);
+    if(errorSpan) {
+      errorSpan.classList.remove("visible");
+    }
+    input.style.borderColor = "var(--border-primary)";
+  }
+  
   contactForm.addEventListener("submit", (e) => {
-    e.preventDefault(); // No backend — prevent page reload
+    e.preventDefault(); 
+    let isValid = true;
+    
+    clearError(nameInput, "error-name");
+    clearError(emailInput, "error-email");
+    clearError(msgInput, "error-message");
+    
+    if (nameInput.value.trim().length < 2) {
+      showError(nameInput, "error-name", "Name must be at least 2 characters.");
+      isValid = false;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput.value.trim())) {
+      showError(emailInput, "error-email", "Please enter a valid email address.");
+      isValid = false;
+    }
+    
+    if (msgInput.value.trim().length < 10) {
+      showError(msgInput, "error-message", "Message must be at least 10 characters.");
+      isValid = false;
+    }
 
-    // Show success message
-    const existingMsg = contactForm.querySelector(".contact__success");
-    if (existingMsg) existingMsg.remove();
-
-    const successMsg = document.createElement("div");
-    successMsg.className = "contact__success";
-    successMsg.textContent = "// Message sent successfully!";
-    contactForm.appendChild(successMsg);
-
-    // Reset form fields
-    contactForm.reset();
-
-    // Remove success message after 4 seconds
-    setTimeout(() => successMsg.remove(), 4000);
+    if (isValid) {
+      showToast("Message sent successfully!", "success");
+      contactForm.reset();
+      
+      localStorage.removeItem("contactDraft_name");
+      localStorage.removeItem("contactDraft_email");
+      localStorage.removeItem("contactDraft_msg");
+    } else {
+      showToast("Please fix the errors in the form.", "error");
+    }
   });
 });
