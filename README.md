@@ -21,6 +21,10 @@ This is a responsive, single-page portfolio website styled as an IDE/code-editor
 - **Local Storage Autosave** (Assignment 2): Automatically saves your contact form drafts to `localStorage` so messages are never lost on reload.
 - **Toast Notifications** (Assignment 2): Provides animated UI popups for successful form submissions or validation errors.
 - **Skills grid** with hover glow effects
+- **Live GitHub API Integration** (Assignment 3): Fetches and displays recent public repositories from GitHub with graceful error handling.
+- **Advanced Project Logic** (Assignment 3): Combines filtering (platform), sorting (newest/oldest), and level-based views (beginner/advanced).
+- **State Management** (Assignment 3): Light/dark mode toggle persisted in `localStorage`.
+- **Visitor Session Timer** (Assignment 3): Tracks and displays how long a user has stayed on the site.
 
 ## Setup Instructions
 
@@ -37,6 +41,27 @@ This is a responsive, single-page portfolio website styled as an IDE/code-editor
    npx -y http-server . -p 8080
    ```
    Then visit [http://localhost:8080](http://localhost:8080).
+
+## User Guide
+
+1. Use the top navigation to jump directly to **Home**, **About**, **Projects**, and **Contact**.
+2. In **Projects**, use the `All`, `Web`, and `Mobile` tabs to filter project cards by platform.
+3. In **Contact**, fill all fields with valid input:
+   - Name must be at least 2 characters.
+   - Email must follow a valid email format.
+   - Message must be at least 10 characters.
+4. Contact form drafts are auto-saved in your browser (`localStorage`) while typing, so refresh will not lose progress.
+5. On submit, toast notifications show whether the message was sent successfully or needs correction.
+6. Use the **Theme** button in the navbar to switch between dark/light modes (your choice is saved).
+7. In **Projects**, combine category tabs with **Sort** and **Level** selectors for multi-step filtering logic.
+8. The **Live GitHub Repositories** panel loads latest repositories and shows a fallback message on API failure.
+
+## Assignment 3 Highlights
+
+- **API integration**: Added GitHub repositories API data display for portfolio-relevant dynamic content.
+- **Complex logic**: Added combined filter + sort + level logic for project cards.
+- **State management**: Added persistent theme preference state in `localStorage`.
+- **Additional advanced behavior**: Added real-time visitor timer to demonstrate runtime state updates.
 
 ## Project Structure
 

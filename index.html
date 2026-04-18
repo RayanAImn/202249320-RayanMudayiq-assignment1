@@ -8,6 +8,385 @@
   <meta name="description"
     content="Software engineer excelling in full stack app development, software design, and UI/UX" />
   <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body.theme-light {
+      --background: #f8fafc;
+      --foreground: #0f172a;
+      --text-secondary: #334155;
+      --border-primary: #cbd5e1;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 0;
+      color: var(--foreground);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1;
+      padding: 0;
+      cursor: pointer;
+      transition: opacity 0.3s, color 0.3s;
+    }
+
+    .theme-toggle:hover {
+      opacity: 1;
+      color: var(--foreground);
+    }
+
+    @media (hover: hover) {
+      .theme-toggle:hover {
+        opacity: 0.7;
+        color: #00d9ff;
+      }
+    }
+
+    .theme-toggle:active,
+    .theme-toggle:focus-visible {
+      opacity: 0.7;
+      color: #00d9ff;
+    }
+
+    .theme-toggle:focus {
+      outline: none;
+      opacity: 1;
+      color: var(--foreground);
+    }
+
+    .hero__timer {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .hero__hint {
+      font-size: 13px;
+      color: #94a3b8;
+      border-left: 2px solid #00d9ff;
+      padding-left: 10px;
+      line-height: 1.5;
+    }
+
+    .projects-filter {
+      flex-wrap: wrap;
+    }
+
+    .project-control {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid #2d3748;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 8px 12px;
+      padding-right: 32px;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s;
+      height: 38px;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #00d9ff 50%),
+        linear-gradient(135deg, #00d9ff 50%, transparent 50%);
+      background-position:
+        calc(100% - 16px) calc(50% - 3px),
+        calc(100% - 10px) calc(50% - 3px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    .project-control:hover {
+      border-color: #00d9ff;
+      box-shadow: 0 0 12px rgba(0, 217, 255, 0.2);
+    }
+
+    .project-control:focus {
+      outline: none;
+      border-color: #00d9ff;
+      box-shadow: 0 0 14px rgba(0, 217, 255, 0.26);
+    }
+
+    .project-control option {
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .projects-level-msg {
+      margin-top: -16px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .projects-filter__hint {
+      margin-top: -18px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .contact__form-hint {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 2px;
+    }
+
+    .github-section {
+      margin-top: 36px;
+      border-top: 1px solid var(--border-primary);
+      padding-top: 20px;
+    }
+
+    .github-section__title {
+      font-size: 1.2rem;
+      color: var(--foreground);
+      margin-bottom: 10px;
+    }
+
+    .github-section__title .bracket {
+      color: #00d9ff;
+    }
+
+    .github-section__hint {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 14px;
+    }
+
+    .github-repos {
+      display: grid;
+      gap: 10px;
+    }
+
+    .github-repo {
+      border: 1px solid var(--border-primary);
+      border-radius: 6px;
+      padding: 12px;
+      background: rgba(15, 23, 42, 0.35);
+    }
+
+    .github-repo__title {
+      color: #00d9ff;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .github-repo__description {
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .github-repos__status {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    body.theme-light .grid-pattern {
+      background-image:
+        linear-gradient(#0f172a 1px, transparent 1px),
+        linear-gradient(90deg, #0f172a 1px, transparent 1px);
+      opacity: 0.03;
+    }
+
+    body.theme-light .bg-code__inner {
+      color: #0f172a;
+    }
+
+    body.theme-light .bg-code__cursor,
+    body.theme-light .typing-cursor {
+      background: #0f172a;
+    }
+
+    body.theme-light .about__title .label,
+    body.theme-light .work__title .label,
+    body.theme-light .contact__title .label,
+    body.theme-light .skills__title,
+    body.theme-light .about__paragraph,
+    body.theme-light .project-card__title,
+    body.theme-light .contact__colon,
+    body.theme-light .github-section__title {
+      color: #0f172a;
+    }
+
+    body.theme-light .line-number,
+    body.theme-light .work__line-number,
+    body.theme-light .contact__line-number {
+      color: #94a3b8;
+    }
+
+    body.theme-light .indent-guide,
+    body.theme-light .work__indent-guide,
+    body.theme-light .contact__indent-guide {
+      background: linear-gradient(to bottom, #cbd5e1, #0284c7, #cbd5e1);
+    }
+
+    body.theme-light .skill-badge,
+    body.theme-light .project-card__inner,
+    body.theme-light .contact__input,
+    body.theme-light .api-quote,
+    body.theme-light .github-repo {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: #cbd5e1;
+    }
+
+    body.theme-light .skill-badge span,
+    body.theme-light .project-card__description,
+    body.theme-light .github-section__hint,
+    body.theme-light .github-repo__description,
+    body.theme-light .projects-filter__hint,
+    body.theme-light .projects-level-msg,
+    body.theme-light .contact__form-hint,
+    body.theme-light .hero__hint,
+    body.theme-light .hero__timer,
+    body.theme-light .api-quote__text,
+    body.theme-light .contact__input::placeholder,
+    body.theme-light .github-repos__status {
+      color: #334155;
+    }
+
+    body.theme-light .project-control {
+      background-color: #ffffff;
+      border-color: #cbd5e1;
+      color: #0f172a;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #0284c7 50%),
+        linear-gradient(135deg, #0284c7 50%, transparent 50%);
+    }
+
+    body.theme-light .project-control option {
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    body.theme-light .contact__key {
+      color: #7c3aed;
+    }
+
+    body.theme-light .contact__value {
+      color: #b45309;
+    }
+
+    body.theme-light .contact__label {
+      color: #6d28d9;
+    }
+
+    body.theme-light .skills {
+      border-top-color: #cbd5e1;
+    }
+
+    body.theme-light .filter-tab {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #334155;
+    }
+
+    body.theme-light .filter-tab:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    body.theme-light .filter-tab--active {
+      background: rgba(2, 132, 199, 0.12);
+      border-color: #0284c7;
+      color: #0369a1;
+      box-shadow: 0 0 10px rgba(2, 132, 199, 0.18);
+    }
+
+    body.theme-light .project-card__badge {
+      color: #0369a1;
+      background: rgba(2, 132, 199, 0.1);
+      border-color: rgba(2, 132, 199, 0.35);
+    }
+
+    body.theme-light .about__glow,
+    body.theme-light .work__glow,
+    body.theme-light .contact__glow {
+      background: radial-gradient(circle at center, rgba(2, 132, 199, 0.14) 0%, transparent 70%);
+    }
+
+    body.theme-light .project-card__inner:hover {
+      border-color: #0284c7;
+      box-shadow: 0 0 18px rgba(2, 132, 199, 0.2);
+    }
+
+    body.theme-light .tech-tag {
+      background: #e2e8f0;
+      color: #0369a1;
+      border-color: #cbd5e1;
+    }
+
+    body.theme-light .toast {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    body.theme-light .github-repo__title a {
+      color: #0369a1;
+    }
+
+    body.theme-light .api-quote__header {
+      color: #475569;
+    }
+
+    body.theme-light .contact__item:hover {
+      background: rgba(2, 132, 199, 0.08);
+    }
+
+    @media (max-width: 768px) {
+      .theme-toggle {
+        font-size: 14px;
+        padding: 14px 0;
+      }
+
+      .bg-code {
+        display: block !important;
+        width: 220px;
+        right: -80px;
+        top: 80px;
+        opacity: 0.14;
+      }
+
+      .bg-code__inner {
+        font-size: 8px;
+      }
+
+      .hero {
+        top: 50%;
+        left: 0;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        padding: 0 24px;
+        box-sizing: border-box;
+      }
+
+      .hero__hint {
+        border-left-width: 0;
+        border-top: 1px solid #2d3748;
+        padding-left: 0;
+        padding-top: 8px;
+      }
+
+      body.theme-light .hero__hint {
+        border-top-color: #cbd5e1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .bg-code {
+        width: 180px;
+        right: -70px;
+        top: 70px;
+        opacity: 0.12;
+      }
+
+      .bg-code__inner {
+        font-size: 7px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -83,6 +462,11 @@
           </span>
         </a>
       </li>
+      <li class="navbar__theme-item">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark mode">
+          Theme: Dark
+        </button>
+      </li>
     </ul>
   </nav>
 
@@ -102,6 +486,10 @@
 
         <!-- Description (types in after name) -->
         <p class="hero__description" id="hero-description" style="display:none;"></p>
+        <p class="hero__hint">
+          Use the top menu to jump between sections, or scroll to explore each panel.
+        </p>
+        <p class="hero__timer" id="visit-timer">On site: 00:00</p>
       </div>
     </section>
 
@@ -225,12 +613,25 @@
                 <button class="filter-tab filter-tab--active" data-filter="all">All</button>
                 <button class="filter-tab" data-filter="web">Web</button>
                 <button class="filter-tab" data-filter="mobile">Mobile</button>
+                <select class="project-control" id="project-sort" aria-label="Sort projects">
+                  <option value="newest">Sort: Newest</option>
+                  <option value="oldest">Sort: Oldest</option>
+                </select>
+                <select class="project-control" id="project-level" aria-label="Project level">
+                  <option value="all">Level: All</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="advanced">Advanced</option>
+                </select>
               </div>
+              <p class="projects-filter__hint">
+                Tip: Select a tab to focus projects by platform.
+              </p>
+              <p class="projects-level-msg" id="projects-level-message">Showing all projects.</p>
 
               <div class="projects-grid" id="projects-grid">
 
                 <!-- Project 1: KFUPM World App -->
-                <div class="project-card project-card--app" data-category="mobile">
+                <div class="project-card project-card--app" data-category="mobile" data-year="2025" data-level="advanced">
                   <div class="project-card__inner">
                     <div class="project-card__text">
                       <span class="project-card__badge">Mobile</span>
@@ -258,7 +659,7 @@
                 </div>
 
                 <!-- Project 2: Voluntary Work Unit Website -->
-                <div class="project-card" data-category="web">
+                <div class="project-card" data-category="web" data-year="2024" data-level="beginner">
                   <div class="project-card__inner">
                     <div class="project-card__text">
                       <span class="project-card__badge">Web</span>
@@ -284,7 +685,7 @@
                 </div>
 
                 <!-- Project 3: Venture Craft Website -->
-                <div class="project-card" data-category="web">
+                <div class="project-card" data-category="web" data-year="2026" data-level="advanced">
                   <div class="project-card__inner">
                     <div class="project-card__text">
                       <span class="project-card__badge">Web</span>
@@ -309,6 +710,17 @@
                 </div>
 
 
+              </div>
+              <div class="github-section" id="github-section">
+                <h3 class="github-section__title">
+                  <span class="bracket">&lt;</span>
+                  <span> Live GitHub Repositories </span>
+                  <span class="bracket">/&gt;</span>
+                </h3>
+                <p class="github-section__hint">Latest public repositories from github.com/RayanAImn.</p>
+                <div class="github-repos" id="github-repos">
+                  <p class="github-repos__status" id="github-repos-status">Loading repositories...</p>
+                </div>
               </div>
 
 
@@ -377,6 +789,9 @@
 
               <!-- Contact Form -->
               <form class="contact__form" id="contact-form" novalidate>
+                <p class="contact__form-hint">
+                  Drafts are auto-saved while you type. Submit to see instant validation feedback.
+                </p>
                 <div class="contact__form-group">
                   <label for="contact-name" class="contact__label">name</label>
                   <input type="text" id="contact-name" name="name" class="contact__input" placeholder="Your Name"

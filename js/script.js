@@ -314,9 +314,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const workEl = document.getElementById("work");
   const bgCodeEl = document.getElementById("bg-code");
   const bgCodeContent = document.getElementById("bg-code-content");
-  const bgCodeCursor = document.getElementById("bg-code-cursor");
   const navLinks = document.querySelectorAll(".navbar__link");
   const contactEl = document.getElementById("contact");
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  const visitTimerEl = document.getElementById("visit-timer");
+  const projectsGrid = document.getElementById("projects-grid");
+  const projectSortSelect = document.getElementById("project-sort");
+  const projectLevelSelect = document.getElementById("project-level");
+  const projectsLevelMessageEl = document.getElementById("projects-level-message");
+  const githubReposEl = document.getElementById("github-repos");
 
   // ══════════════════════════════════════════
   //  1. TYPING TEXT — Hero name
@@ -326,8 +332,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let nameIndex = 0;
   let descIndex = 0;
-  let nameComplete = false;
-  let descComplete = false;
 
   // Create cursor element for name
   const nameCursor = document.createElement("span");
@@ -340,7 +344,6 @@ document.addEventListener("DOMContentLoaded", () => {
       heroNameEl.appendChild(nameCursor);
       nameIndex++;
     } else {
-      nameComplete = true;
       nameCursor.remove();
       clearInterval(nameInterval);
       // Start typing description
@@ -359,7 +362,6 @@ document.addEventListener("DOMContentLoaded", () => {
         heroDescEl.appendChild(descCursor);
         descIndex++;
       } else {
-        descComplete = true;
         descCursor.remove();
         clearInterval(descInterval);
         // Show glow after description is done
@@ -410,10 +412,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleScrollLogic() {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
+    const isMobileLayout = window.innerWidth <= 768;
 
     // ── Hero parallax fade-out ──
     const heroProgress = Math.min(scrollY / (windowHeight * 0.5), 1);
-    heroEl.style.transform = `translateX(-${heroProgress * 150}%)`;
+    const heroVerticalOffset = isMobileLayout ? " translateY(-50%)" : "";
+    heroEl.style.transform = `translateX(-${heroProgress * 150}%)${heroVerticalOffset}`;
     heroEl.style.opacity = 1 - heroProgress;
 
     // ── Background code slide-out ──
@@ -446,7 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (scrollY >= contactTop - 200) {
         newActive = "Contact";
       } else if (scrollY >= workTop - 100) {
-        newActive = "Work";
+        newActive = "Projects";
       } else if (scrollY >= aboutTop - 100) {
         newActive = "About";
       }
@@ -523,6 +527,33 @@ document.addEventListener("DOMContentLoaded", () => {
   onScroll(); // run once on load
 
   // ══════════════════════════════════════════
+  //  4. ASSIGNMENT 3: STATE + TIMER
+  // ══════════════════════════════════════════
+  function applyTheme(theme) {
+    document.body.classList.toggle("theme-light", theme === "light");
+    themeToggleBtn.textContent = `Theme: ${theme === "light" ? "Light" : "Dark"}`;
+  }
+
+  const savedTheme = localStorage.getItem("portfolioTheme") || "dark";
+  applyTheme(savedTheme);
+
+  themeToggleBtn.addEventListener("click", () => {
+    const nextTheme = document.body.classList.contains("theme-light") ? "dark" : "light";
+    applyTheme(nextTheme);
+    localStorage.setItem("portfolioTheme", nextTheme);
+    themeToggleBtn.blur();
+  });
+
+  const visitStart = Date.now();
+  setInterval(() => {
+    const elapsedMs = Date.now() - visitStart;
+    const totalSeconds = Math.floor(elapsedMs / 1000);
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+    const seconds = String(totalSeconds % 60).padStart(2, "0");
+    visitTimerEl.textContent = `On site: ${minutes}:${seconds}`;
+  }, 1000);
+
+  // ══════════════════════════════════════════
   //  5. ASSIGNMENT 2: INTERACTIVE FEATURES
   // ══════════════════════════════════════════
   
@@ -546,34 +577,64 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 4000);
   }
 
-  // -- B. Project Filtering --
+  // -- B. Project Filtering + Sorting + Level Rules --
   const filterTabs = document.querySelectorAll(".filter-tab");
   const projectCards = document.querySelectorAll(".project-card");
-  
-  filterTabs.forEach(tab => {
+
+  function applyProjectFiltersAndSort() {
+    const activeFilterTab = document.querySelector(".filter-tab--active");
+    const filter = activeFilterTab ? activeFilterTab.dataset.filter : "all";
+    const selectedLevel = projectLevelSelect.value;
+    const selectedSort = projectSortSelect.value;
+
+    projectCards.forEach((card) => {
+      const matchesFilter = filter === "all" || card.dataset.category === filter;
+      const matchesLevel = selectedLevel === "all" || card.dataset.level === selectedLevel;
+
+      if (matchesFilter && matchesLevel) {
+        card.classList.remove("hide");
+        card.classList.add("show");
+        card.style.position = "relative";
+      } else {
+        card.classList.remove("show");
+        card.classList.add("hide");
+        setTimeout(() => {
+          if (card.classList.contains("hide")) {
+            card.style.position = "absolute";
+          }
+        }, 400);
+      }
+    });
+
+    const visibleCards = Array.from(projectCards).filter((card) => card.classList.contains("show"));
+    visibleCards.sort((a, b) => {
+      const yearA = Number(a.dataset.year || 0);
+      const yearB = Number(b.dataset.year || 0);
+      return selectedSort === "newest" ? yearB - yearA : yearA - yearB;
+    });
+
+    visibleCards.forEach((card) => projectsGrid.appendChild(card));
+
+    if (selectedLevel === "beginner") {
+      projectsLevelMessageEl.textContent = "Beginner mode: showing foundational projects.";
+    } else if (selectedLevel === "advanced") {
+      projectsLevelMessageEl.textContent = "Advanced mode: showing complex and high-impact projects.";
+    } else {
+      projectsLevelMessageEl.textContent = "Showing all projects.";
+    }
+  }
+
+  filterTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      filterTabs.forEach(t => t.classList.remove("filter-tab--active"));
+      filterTabs.forEach((t) => t.classList.remove("filter-tab--active"));
       tab.classList.add("filter-tab--active");
-      
-      const filter = tab.dataset.filter;
-      
-      projectCards.forEach(card => {
-        if (filter === "all" || card.dataset.category === filter) {
-          card.classList.remove("hide");
-          card.classList.add("show");
-          card.style.position = "relative";
-        } else {
-          card.classList.remove("show");
-          card.classList.add("hide");
-          setTimeout(() => {
-            if(card.classList.contains("hide")) {
-                card.style.position = "absolute";
-            }
-          }, 400);
-        }
-      });
+      applyProjectFiltersAndSort();
     });
   });
+
+  projectSortSelect.addEventListener("change", applyProjectFiltersAndSort);
+  projectLevelSelect.addEventListener("change", applyProjectFiltersAndSort);
+  applyProjectFiltersAndSort();
 
   // -- C. Public API (Fun Fact / Quote) --
   async function fetchRandomQuote() {
@@ -590,7 +651,47 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   fetchRandomQuote();
 
-  // -- D. Contact Form Auto-Save & Validation --
+  // -- D. External API: Live GitHub Repositories --
+  async function fetchGithubRepositories() {
+    try {
+      const response = await fetch("https://api.github.com/users/RayanAImn/repos?sort=updated&per_page=4");
+      if (!response.ok) throw new Error("GitHub API request failed");
+
+      const repos = await response.json();
+      if (!Array.isArray(repos) || repos.length === 0) {
+        throw new Error("No repositories returned");
+      }
+
+      githubReposEl.innerHTML = "";
+      repos.slice(0, 4).forEach((repo) => {
+        const repoCard = document.createElement("article");
+        repoCard.className = "github-repo";
+
+        const title = document.createElement("h4");
+        title.className = "github-repo__title";
+        const link = document.createElement("a");
+        link.href = repo.html_url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = repo.name;
+        title.appendChild(link);
+
+        const description = document.createElement("p");
+        description.className = "github-repo__description";
+        description.textContent = repo.description || "No description available.";
+
+        repoCard.appendChild(title);
+        repoCard.appendChild(description);
+        githubReposEl.appendChild(repoCard);
+      });
+    } catch (error) {
+      githubReposEl.innerHTML = '<p class="github-repos__status">Could not load GitHub repositories right now. Please try again later.</p>';
+      console.error("Failed to fetch GitHub repositories:", error);
+    }
+  }
+  fetchGithubRepositories();
+
+  // -- E. Contact Form Auto-Save & Validation --
   const contactForm = document.getElementById("contact-form");
   const nameInput = document.getElementById("contact-name");
   const emailInput = document.getElementById("contact-email");

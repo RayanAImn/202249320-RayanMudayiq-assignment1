@@ -86,3 +86,46 @@ The interactive features introduced in Assignment 2 (Data Validation, Local Stor
 - **All AI suggestions were reviewed** and manually typed into the project to ensure full comprehension; copy-pasting was strictly avoided for logical blocks.
 - **Modifications made**: The AI-suggested toast notifications were heavily refactored to match the project's IDE-styling and specifically integrated into my custom frontend validation script.
 - **Understanding verified**: Every regex pattern and `fetch` parameter provided by AI was broken down and understood before being committed to the project. The core architectural flow remains entirely my own work.
+
+---
+
+## Assignment 3: Advanced Functionality
+
+For Assignment 3, AI was used as a targeted engineering assistant while implementing advanced portfolio functionality (state management, API integration, and multi-step logic).
+
+### Tools Used & Use Cases
+
+| Tool | Use Case |
+|------|----------|
+| **Claude (Anthropic)** | Helped plan and validate logic for combining project filter/sort/level rules and drafting error-handling strategies for API fallbacks. |
+| **GitHub Copilot** | Assisted with repetitive DOM code patterns, event listener boilerplate, and UI text updates. |
+
+### Specific Uses
+
+- **GitHub API integration**: Used AI to verify a clean `fetch` pattern for loading repositories and presenting friendly fallback states when requests fail.
+- **State management**: Used AI to compare approaches for theme persistence (`localStorage`) and selected a lightweight class-toggle model.
+- **Complex logic composition**: Used AI to structure the sequence of applying project platform filter, level filter, then year-based sorting while keeping transitions smooth.
+- **Timer feature**: Confirmed a minimal `setInterval` implementation with safe formatting (`MM:SS`) for visitor session time display.
+
+### Benefits & Challenges
+
+#### Benefits
+- Reduced implementation time for repetitive UI scripting and event plumbing.
+- Helped catch edge cases in combined project filtering/sorting behavior.
+- Improved clarity around user-facing error messages for external API failures.
+
+#### Challenges
+- Some AI suggestions were too broad and required narrowing to fit the existing architecture.
+- AI occasionally proposed stylistic refactors unrelated to assignment scope; these were rejected to keep the code focused.
+
+### Learning Outcomes
+
+- Improved ability to design state-driven UI behavior in vanilla JavaScript.
+- Learned to combine multiple conditions (category + level + sort order) into predictable, testable UI logic.
+- Gained better understanding of resilient API UI patterns (loading, success, empty, and failure states).
+
+### Responsible Use & Modifications
+
+- All AI-generated suggestions were reviewed, simplified, and adapted manually before final integration.
+- Existing project conventions (naming, structure, style) were preserved to avoid introducing inconsistency.
+- Final implementation decisions were made based on assignment requirements and maintainability, not raw AI output.
