@@ -323,6 +323,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const projectLevelSelect = document.getElementById("project-level");
   const projectsLevelMessageEl = document.getElementById("projects-level-message");
   const githubReposEl = document.getElementById("github-repos");
+  const quickActionsTrigger = document.getElementById("quick-actions-trigger");
+  const commandPaletteEl = document.getElementById("command-palette");
+  const commandPaletteCloseBtn = document.getElementById("command-palette-close");
+  const commandPaletteInput = document.getElementById("command-palette-input");
+  const commandPaletteList = document.getElementById("command-palette-list");
 
   // ══════════════════════════════════════════
   //  1. TYPING TEXT — Hero name
@@ -384,12 +389,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Typing loop for background code (runs at 30 ms ticks)
-  setInterval(() => {
+  const codeTypingInterval = setInterval(() => {
     const target = getCodeTarget();
     if (codeDisplayedLen < target && codeDisplayedLen < dartCodeSnippet.length) {
       codeDisplayedLen = Math.min(codeDisplayedLen + 2, dartCodeSnippet.length);
       const visible = dartCodeSnippet.slice(0, codeDisplayedLen);
       bgCodeContent.innerHTML = syntaxHighlight(visible);
+    }
+
+    if (codeDisplayedLen >= dartCodeSnippet.length) {
+      clearInterval(codeTypingInterval);
     }
   }, 30);
 
@@ -543,6 +552,121 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("portfolioTheme", nextTheme);
     themeToggleBtn.blur();
   });
+  
+  // ══════════════════════════════════════════
+  //  4.1 ASSIGNMENT 4 INNOVATION: QUICK ACTIONS
+  // ══════════════════════════════════════════
+  function getQuickActions() {
+    const nextTheme = document.body.classList.contains("theme-light") ? "dark" : "light";
+
+    return [
+      {
+        id: "go-home",
+        label: "Go to Home",
+        keywords: "home top start hero",
+        run: () => window.scrollTo({ top: 0, behavior: "smooth" })
+      },
+      {
+        id: "go-about",
+        label: "Go to About",
+        keywords: "about profile bio",
+        run: () => aboutEl.scrollIntoView({ behavior: "smooth", block: "start" })
+      },
+      {
+        id: "go-projects",
+        label: "Go to Projects",
+        keywords: "projects work portfolio",
+        run: () => workEl.scrollIntoView({ behavior: "smooth", block: "start" })
+      },
+      {
+        id: "go-contact",
+        label: "Go to Contact",
+        keywords: "contact email message",
+        run: () => contactEl.scrollIntoView({ behavior: "smooth", block: "start" })
+      },
+      {
+        id: "toggle-theme",
+        label: `Switch to ${nextTheme} theme`,
+        keywords: `theme mode ${nextTheme}`,
+        run: () => {
+          applyTheme(nextTheme);
+          localStorage.setItem("portfolioTheme", nextTheme);
+        }
+      }
+    ];
+  }
+
+  function renderQuickActions(filterText = "") {
+    const normalized = filterText.trim().toLowerCase();
+    const actions = getQuickActions().filter((action) => {
+      if (!normalized) return true;
+      return `${action.label} ${action.keywords}`.toLowerCase().includes(normalized);
+    });
+
+    commandPaletteList.innerHTML = "";
+
+    if (actions.length === 0) {
+      commandPaletteList.innerHTML = '<p class="command-palette__empty">No actions match your search.</p>';
+      return;
+    }
+
+    actions.forEach((action) => {
+      const actionButton = document.createElement("button");
+      actionButton.type = "button";
+      actionButton.className = "command-palette__action";
+      actionButton.textContent = action.label;
+      actionButton.addEventListener("click", () => {
+        closeCommandPalette();
+        action.run();
+      });
+      commandPaletteList.appendChild(actionButton);
+    });
+  }
+
+  function openCommandPalette() {
+    commandPaletteEl.hidden = false;
+    document.body.style.overflow = "hidden";
+    commandPaletteInput.value = "";
+    renderQuickActions("");
+    commandPaletteInput.focus();
+  }
+
+  function closeCommandPalette() {
+    commandPaletteEl.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  if (quickActionsTrigger && commandPaletteEl && commandPaletteCloseBtn && commandPaletteInput && commandPaletteList) {
+    quickActionsTrigger.addEventListener("click", openCommandPalette);
+    commandPaletteCloseBtn.addEventListener("click", closeCommandPalette);
+
+    commandPaletteInput.addEventListener("input", (event) => {
+      renderQuickActions(event.target.value);
+    });
+
+    commandPaletteInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        const firstAction = commandPaletteList.querySelector(".command-palette__action");
+        if (firstAction) firstAction.click();
+      }
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    const isShortcut = (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k";
+    if (isShortcut) {
+      event.preventDefault();
+      if (commandPaletteEl.hidden) {
+        openCommandPalette();
+      } else {
+        closeCommandPalette();
+      }
+    }
+
+    if (event.key === "Escape" && !commandPaletteEl.hidden) {
+      closeCommandPalette();
+    }
+  });
 
   const visitStart = Date.now();
   setInterval(() => {
@@ -635,14 +759,25 @@ document.addEventListener("DOMContentLoaded", () => {
   projectSortSelect.addEventListener("change", applyProjectFiltersAndSort);
   projectLevelSelect.addEventListener("change", applyProjectFiltersAndSort);
   applyProjectFiltersAndSort();
+  
+  async function fetchJsonWithTimeout(url, timeoutMs = 8000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      const response = await fetch(url, { signal: controller.signal });
+      if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+      return await response.json();
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
 
   // -- C. Public API (Fun Fact / Quote) --
   async function fetchRandomQuote() {
     const quoteText = document.getElementById("api-quote-text");
     try {
-      const response = await fetch("https://api.adviceslip.com/advice");
-      if (!response.ok) throw new Error("Network response was not ok");
-      const data = await response.json();
+      const data = await fetchJsonWithTimeout("https://api.adviceslip.com/advice");
       quoteText.textContent = `"${data.slip.advice}"`;
     } catch (error) {
       quoteText.textContent = `"The only way to do great work is to love what you do." - Fallback Quote`;
@@ -654,10 +789,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // -- D. External API: Live GitHub Repositories --
   async function fetchGithubRepositories() {
     try {
-      const response = await fetch("https://api.github.com/users/RayanAImn/repos?sort=updated&per_page=4");
-      if (!response.ok) throw new Error("GitHub API request failed");
-
-      const repos = await response.json();
+      const repos = await fetchJsonWithTimeout("https://api.github.com/users/RayanAImn/repos?sort=updated&per_page=4");
       if (!Array.isArray(repos) || repos.length === 0) {
         throw new Error("No repositories returned");
       }

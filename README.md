@@ -1,98 +1,109 @@
-# Rayan Mudhayiq — Personal Portfolio Website
+# Assignment 4 - Personal Web Application (Portfolio)
 
-A personal portfolio website built with **HTML**, **CSS**, and **JavaScript**.
+This repository contains my final polished personal portfolio web application for Assignment 4.
 
-## Description
+## Project Overview
 
-This is a responsive, single-page portfolio website styled as an IDE/code-editor interface. It showcases my background, projects, and contact information through an interactive, scroll-driven experience with typing animations, parallax effects, and a syntax-highlighted code background.
+The project is a responsive, single-page portfolio website built with vanilla HTML, CSS, and JavaScript. It combines all previous assignment features (API usage, advanced DOM logic, state management) and adds an Assignment 4 innovation feature: a quick-actions command palette (`Ctrl/Cmd + K`) for fast navigation and theme control.
 
-## Features
+## Key Features
 
-- **Typing animation** on the hero section (name + description)
-- **Scroll-driven effects**: parallax fade-out, section fade-in, background code reveal
-- **Syntax-highlighted** Dart code background panel
-- **Animated gradient orbs** background
-- **IDE-styled** About, Projects, and Contact sections with line numbers and indent guides
-- **Project showcase** with floating screenshots for web and mobile projects
-- **Dynamic Project Filtering** (Assignment 2): Filter projects dynamically by Web, Mobile, or All with smooth enter/exit animations.
-- **API Integration** (Assignment 2): Fetches and displays a random "Advice of the Day" using a public API (`fetch/async`).
-- **Fully responsive** design with hamburger menu and mobile-optimized project cards
-- **Advanced Contact Form** (Assignment 2): Features strict real-time validation with inline warning messages.
-- **Local Storage Autosave** (Assignment 2): Automatically saves your contact form drafts to `localStorage` so messages are never lost on reload.
-- **Toast Notifications** (Assignment 2): Provides animated UI popups for successful form submissions or validation errors.
-- **Skills grid** with hover glow effects
-- **Live GitHub API Integration** (Assignment 3): Fetches and displays recent public repositories from GitHub with graceful error handling.
-- **Advanced Project Logic** (Assignment 3): Combines filtering (platform), sorting (newest/oldest), and level-based views (beginner/advanced).
-- **State Management** (Assignment 3): Light/dark mode toggle persisted in `localStorage`.
-- **Visitor Session Timer** (Assignment 3): Tracks and displays how long a user has stayed on the site.
+- Responsive single-page portfolio layout
+- Typing hero animation and scroll-driven reveal effects
+- Project filtering by platform + level, plus year sorting
+- Live API integration:
+  - Advice API (fun fact section)
+  - GitHub Repositories API (latest repos)
+- Contact form with:
+  - real-time draft autosave (`localStorage`)
+  - field validation and inline errors
+  - toast notifications
+- Theme state management (dark/light persisted in `localStorage`)
+- Visitor session timer
+- Assignment 4 innovation: quick-actions palette (`Ctrl/Cmd + K`)
 
-## Setup Instructions
+## Image Optimization (Grading Evidence)
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/202249320-RayanMudayiq-assignment1.git
-   cd 202249320-RayanMudayiq-assignment1
-   ```
+To optimize website size and loading performance, I used `js/conver-images.js` to convert portfolio images from PNG to WebP.
 
-2. **Open directly** — just open `index.html` in any modern web browser. No build tools or dependencies required.
+- Converted files: `5`
+- Total size before: `2.33 MB`
+- Total size after: `216.1 KB`
+- Overall reduction: `91%`
 
-3. **Or use a local server** (optional, for a more accurate experience):
-   ```bash
-   npx -y http-server . -p 8080
-   ```
-   Then visit [http://localhost:8080](http://localhost:8080).
+The website now serves `.webp` files directly in `index.html`.
 
-## User Guide
+## Assignment 4 Requirement Mapping
 
-1. Use the top navigation to jump directly to **Home**, **About**, **Projects**, and **Contact**.
-2. In **Projects**, use the `All`, `Web`, and `Mobile` tabs to filter project cards by platform.
-3. In **Contact**, fill all fields with valid input:
-   - Name must be at least 2 characters.
-   - Email must follow a valid email format.
-   - Message must be at least 10 characters.
-4. Contact form drafts are auto-saved in your browser (`localStorage`) while typing, so refresh will not lose progress.
-5. On submit, toast notifications show whether the message was sent successfully or needs correction.
-6. Use the **Theme** button in the navbar to switch between dark/light modes (your choice is saved).
-7. In **Projects**, combine category tabs with **Sort** and **Level** selectors for multi-step filtering logic.
-8. The **Live GitHub Repositories** panel loads latest repositories and shows a fallback message on API failure.
+- Complete application: implemented and functional
+- Professional quality: clean structure, error handling, responsive UI
+- Innovation: quick-actions command palette
+- AI integration: documented in `docs/ai-usage-report.md`
+- Documentation: README + technical documentation included
 
-## Assignment 3 Highlights
+## Run Locally
 
-- **API integration**: Added GitHub repositories API data display for portfolio-relevant dynamic content.
-- **Complex logic**: Added combined filter + sort + level logic for project cards.
-- **State management**: Added persistent theme preference state in `localStorage`.
-- **Additional advanced behavior**: Added real-time visitor timer to demonstrate runtime state updates.
+1. Clone the repository:
+
+```bash
+git clone <your-repo-url>
+cd 202249320-RayanMudayiq-assignment1
+```
+
+2. Open `index.html` directly in a modern browser.
+
+3. Optional local server:
+
+```bash
+npx -y http-server . -p 8080
+```
+
+Then open `http://localhost:8080`.
+
+Optional: rerun image optimization
+
+```bash
+npm install
+node js/conver-images.js
+```
 
 ## Project Structure
 
-```
-assignment-1/
+```text
+202249320-RayanMudayiq-assignment1/
 ├── README.md
 ├── index.html
 ├── css/
 │   └── styles.css
 ├── js/
-│   └── script.js
+│   ├── script.js
+│   └── conver-images.js
 ├── assets/
 │   └── images/
-│       ├── kfupm_world1.png
-│       ├── kfupm_world2.png
-│       ├── kfupm_world3.png
-│       ├── kvwu.png
-│       └── venture_carft.png
 ├── docs/
 │   ├── ai-usage-report.md
 │   └── technical-documentation.md
+├── presentation/
+│   ├── README.md
+│   ├── slides.pdf            (manual deliverable)
+│   └── demo-video.mp4        (manual deliverable)
 └── .gitignore
 ```
 
-## AI Usage Summary
+## AI Tools Summary
 
-AI tools (GitHub Copilot, Claude) were used to assist with code generation, CSS styling, and responsive design implementation. Full details are documented in [`docs/ai-usage-report.md`](docs/ai-usage-report.md).
+AI tools were used for targeted engineering assistance (debugging, quality review, documentation refinement, and implementation support). Full details, modifications, and responsible-use notes are documented in:
 
-## Technologies
+- `docs/ai-usage-report.md`
 
-- HTML5
-- CSS3 (custom properties, keyframe animations, grid, flexbox)
-- Vanilla JavaScript (ES6+)
-- Google Fonts (JetBrains Mono)
+## Technical Documentation
+
+Detailed architecture, feature flow, implementation details, and testing checklist are in:
+
+- `docs/technical-documentation.md`
+
+## Optional Deployment
+
+Add your live link here once deployed (GitHub Pages / Netlify / Vercel):
+
+- Live URL: `TBD`

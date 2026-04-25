@@ -467,6 +467,11 @@
           Theme: Dark
         </button>
       </li>
+      <li class="navbar__actions-item">
+        <button class="theme-toggle" id="quick-actions-trigger" type="button" aria-label="Open quick actions">
+          Quick Actions
+        </button>
+      </li>
     </ul>
   </nav>
 
@@ -650,9 +655,9 @@
                       </div>
                     </div>
                     <div class="project-card__images">
-                      <img src="assets/images/kfupm_world1.png" alt="KFUPM World App Screenshot 1" />
-                      <img src="assets/images/kfupm_world2.png" alt="KFUPM World App Screenshot 2" />
-                      <img src="assets/images/kfupm_world3.png" alt="KFUPM World App Screenshot 3" />
+                      <img src="assets/images/kfupm_world1.webp" alt="KFUPM World App Screenshot 1" />
+                      <img src="assets/images/kfupm_world2.webp" alt="KFUPM World App Screenshot 2" />
+                      <img src="assets/images/kfupm_world3.webp" alt="KFUPM World App Screenshot 3" />
                     </div>
                     <div class="project-card__glow-line"></div>
                   </div>
@@ -678,7 +683,7 @@
                       </div>
                     </div>
                     <div class="project-card__image">
-                      <img src="assets/images/kvwu.png" alt="Voluntary Work Unit Website Screenshot" />
+                      <img src="assets/images/kvwu.webp" alt="Voluntary Work Unit Website Screenshot" />
                     </div>
                     <div class="project-card__glow-line"></div>
                   </div>
@@ -703,7 +708,7 @@
                       </div>
                     </div>
                     <div class="project-card__image">
-                      <img src="assets/images/venture_carft.png" alt="Venture Craft Website Screenshot" />
+                      <img src="assets/images/venture_carft.webp" alt="Venture Craft Website Screenshot" />
                     </div>
                     <div class="project-card__glow-line"></div>
                   </div>
@@ -821,6 +826,28 @@
     </section>
 
   </main>
+
+  <!-- Quick Actions Palette -->
+  <div class="command-palette" id="command-palette" hidden>
+    <button class="command-palette__backdrop" id="command-palette-close" type="button" aria-label="Close quick actions"></button>
+    <div
+      class="command-palette__panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="command-palette-title"
+    >
+      <p class="command-palette__title" id="command-palette-title">Quick Actions (Ctrl/Cmd + K)</p>
+      <input
+        class="command-palette__input"
+        id="command-palette-input"
+        type="text"
+        placeholder="Type to filter actions..."
+        autocomplete="off"
+      />
+      <div class="command-palette__list" id="command-palette-list"></div>
+      <p class="command-palette__hint">Press <strong>Enter</strong> to run the first visible action, or <strong>Esc</strong> to close.</p>
+    </div>
+  </div>
 
   <!-- Global Toast Container -->
   <div id="toast-container" class="toast-container"></div>

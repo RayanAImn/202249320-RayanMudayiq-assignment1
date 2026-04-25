@@ -1,131 +1,45 @@
 # AI Usage Report
 
-## Background
-
-The portfolio website was already designed, developed, and fully functional before any AI tools were involved. The original version was built using **Next.js**, **React**, and **Tailwind CSS**. AI was then used to **refactor and convert** the existing codebase into native **HTML**, **CSS**, and **JavaScript** to meet the assignment requirements — the design, content, and structure are entirely original work.
-
 ## Tools Used & Use Cases
 
-| Tool | Use Case |
-|------|----------|
-| **Claude (Anthropic)** | Code generation, converting React/Next.js components to vanilla HTML/CSS/JS, debugging layout issues, implementing responsive design |
-| **GitHub Copilot** | Code completion and inline suggestions while writing CSS and JavaScript |
+| Tool | Use Cases in Assignment 4 |
+|---|---|
+| ChatGPT (Codex) | Requirement mapping from rubric, code quality review, implementing the quick-actions feature, documentation refinement |
+| GitHub Copilot | Inline code completion for repetitive JavaScript and CSS patterns |
 
-### Specific Uses
+### Where AI Was Used
 
-- **HTML Structure**: AI assisted in converting the original Next.js React components into semantic HTML, ensuring all interactive elements and content were preserved.
-- **CSS Styling**: AI helped translate Tailwind CSS utility classes into vanilla CSS, including animations, responsive breakpoints, and the IDE-themed design system.
-- **JavaScript Logic**: AI ported React hooks (`useState`, `useEffect`) and component lifecycle logic into vanilla JavaScript event listeners and DOM manipulation.
-- **Responsive Design**: AI generated media queries for tablet (1024px), small tablet (768px), and mobile (480px) breakpoints, including the hamburger menu implementation.
-- **Code Review**: AI was used to audit the project against assignment requirements and identify missing features.
+- Interpreted Assignment 4 rubric requirements and mapped them to concrete repository tasks.
+- Reviewed project quality against documentation, structure, and feature expectations.
+- Helped implement a new innovation feature (quick-actions command palette with keyboard shortcut).
+- Improved API resilience with timeout-based fetch helper and fallback handling.
+- Updated README and technical documentation to align with submission criteria.
 
 ## Benefits & Challenges
 
 ### Benefits
-- **Speed**: AI significantly accelerated the conversion from Next.js to vanilla HTML/CSS/JS by handling repetitive translation tasks.
-- **Consistency**: AI ensured consistent styling patterns across all sections (About, Work, Contact) by following the established IDE-themed design language.
-- **Debugging**: AI quickly identified issues with scroll behavior and responsive layout that would have taken longer to find manually.
+
+- Faster requirement-to-implementation workflow.
+- Better coverage of edge cases (API timeout/failure paths).
+- More structured and rubric-aligned documentation.
 
 ### Challenges
-- **Over-generation**: AI sometimes produced more code than necessary, requiring manual trimming.
-- **Context Limits**: When working on large CSS files, AI occasionally lost track of existing styles, leading to duplicate rules that needed cleanup.
-- **Design Judgment**: AI defaults to generic designs unless given very specific visual direction — the IDE-themed aesthetic required explicit guidance.
+
+- Some AI suggestions were initially broader than assignment scope.
+- Required careful filtering to avoid unnecessary refactors.
+- Needed manual judgment for naming, UX wording, and final behavior decisions.
 
 ## Learning Outcomes
 
-- Gained understanding of how React component patterns (state, effects, refs) map to vanilla JavaScript equivalents (variables, event listeners, DOM queries).
-- Learned the relationship between Tailwind utility classes and the underlying CSS properties they represent.
-- Improved understanding of CSS architecture: organizing styles by component, using BEM-like naming, and structuring responsive breakpoints.
-- Learned to use scroll-driven animations with `requestAnimationFrame`-style patterns using `setInterval` and scroll event listeners.
+- Improved ability to translate rubric language into technical deliverables.
+- Strengthened understanding of resilient API handling in frontend apps.
+- Practiced building keyboard-accessible interaction patterns.
+- Improved documentation quality by tying implementation details to grading criteria.
 
 ## Responsible Use & Modifications
 
-- **All AI-generated code was reviewed** line by line before inclusion in the project.
-- **Modifications made**: Adjusted color values, spacing, and animation timing to match the original design. Restructured CSS organization for clarity. Added meaningful comments to explain code purpose.
-- **Understanding verified**: Each feature (typing animation, scroll parallax, syntax highlighting, form handling) was understood conceptually before accepting AI suggestions.
-- **Originality**: The overall design concept, project content, and section structure are original work. AI was used as an implementation accelerator, not as the creative source.
-
----
-
-## Assignment 2: Interactive Features
-
-The interactive features introduced in Assignment 2 (Data Validation, Local Storage, API fetching, and DOM filtering) were implemented manually. AI tools were used strictly as an assistant to suggest syntax, troubleshoot layout quirks, and recommend best practices, rather than generating the codebase.
-
-### Tools Used & Use Cases
-
-| Tool | Use Case |
-|------|----------|
-| **Claude (Anthropic)** | Problem-solving for smooth CSS transitions, regex formulation, and explaining `async/await` error handling patterns. |
-| **GitHub Copilot** | Inline code completion for repetitive variable declarations and `addEventListener` boilerplate. |
-
-### Specific Uses
-
-- **API Integration**: Used AI to understand the syntax for implementing an asynchronous `fetch` request, specifically how to handle gracefully falling back to a default string when the Advice Slip API request fails.
-- **Local Storage Drafts**: Consulted AI on the best event listeners (`input` vs `change`) to use when autosaving the Contact Form data to `localStorage` in real-time.
-- **UI Interactivity**: I wrote the project filtering logic, but used AI to help debug why the project cards were snapping into place instead of transitioning smoothly. AI suggested utilizing `setTimeout` to wait for CSS opacity transitions to finish before removing elements from the flow.
-- **Form Error Handling**: Asked AI to generate and explain the regular expression used for validating email formats (`^[^\s@]+@[^\s@]+\.[^\s@]+$`). I manually integrated this regex into my own validation logic.
-
-### Benefits & Challenges
-
-#### Benefits
-- **Syntax Reference**: AI was exceptionally fast at providing the exact regex string needed for email validation, saving me from manually testing regex patterns.
-- **Animation Debugging**: AI successfully identified that adding and removing `display: none` instantly breaks CSS transitions, suggesting the `position: absolute` workaround.
-
-#### Challenges
-- **Cookie-cutter Code**: AI often tried to rewrite my entire function instead of just answering the specific logic question I asked. I had to carefully extract only the useful lines (like the `fetch` block) and discard the rest.
-- **Over-engineering**: AI suggested heavy libraries or complex observers for the toast animations. I had to reject these and insist on a simple, native CSS class-toggling approach to ensure I understood the code.
-
-### Learning Outcomes
-
-- Gained a solid understanding of Promises and the `async/await` syntax for handling asynchronous web API requests.
-- Learned the crucial difference between the DOM's physical layout flow (`position: relative` vs `absolute`) and visual visibility (`opacity`) when building CSS transitions.
-- Learned how to persist lightweight data across browser reloads using the native `localStorage` API.
-
-### Responsible Use & Modifications
-
-- **All AI suggestions were reviewed** and manually typed into the project to ensure full comprehension; copy-pasting was strictly avoided for logical blocks.
-- **Modifications made**: The AI-suggested toast notifications were heavily refactored to match the project's IDE-styling and specifically integrated into my custom frontend validation script.
-- **Understanding verified**: Every regex pattern and `fetch` parameter provided by AI was broken down and understood before being committed to the project. The core architectural flow remains entirely my own work.
-
----
-
-## Assignment 3: Advanced Functionality
-
-For Assignment 3, AI was used as a targeted engineering assistant while implementing advanced portfolio functionality (state management, API integration, and multi-step logic).
-
-### Tools Used & Use Cases
-
-| Tool | Use Case |
-|------|----------|
-| **Claude (Anthropic)** | Helped plan and validate logic for combining project filter/sort/level rules and drafting error-handling strategies for API fallbacks. |
-| **GitHub Copilot** | Assisted with repetitive DOM code patterns, event listener boilerplate, and UI text updates. |
-
-### Specific Uses
-
-- **GitHub API integration**: Used AI to verify a clean `fetch` pattern for loading repositories and presenting friendly fallback states when requests fail.
-- **State management**: Used AI to compare approaches for theme persistence (`localStorage`) and selected a lightweight class-toggle model.
-- **Complex logic composition**: Used AI to structure the sequence of applying project platform filter, level filter, then year-based sorting while keeping transitions smooth.
-- **Timer feature**: Confirmed a minimal `setInterval` implementation with safe formatting (`MM:SS`) for visitor session time display.
-
-### Benefits & Challenges
-
-#### Benefits
-- Reduced implementation time for repetitive UI scripting and event plumbing.
-- Helped catch edge cases in combined project filtering/sorting behavior.
-- Improved clarity around user-facing error messages for external API failures.
-
-#### Challenges
-- Some AI suggestions were too broad and required narrowing to fit the existing architecture.
-- AI occasionally proposed stylistic refactors unrelated to assignment scope; these were rejected to keep the code focused.
-
-### Learning Outcomes
-
-- Improved ability to design state-driven UI behavior in vanilla JavaScript.
-- Learned to combine multiple conditions (category + level + sort order) into predictable, testable UI logic.
-- Gained better understanding of resilient API UI patterns (loading, success, empty, and failure states).
-
-### Responsible Use & Modifications
-
-- All AI-generated suggestions were reviewed, simplified, and adapted manually before final integration.
-- Existing project conventions (naming, structure, style) were preserved to avoid introducing inconsistency.
-- Final implementation decisions were made based on assignment requirements and maintainability, not raw AI output.
+- All AI output was reviewed before use.
+- AI-generated ideas were adapted to existing project architecture and style.
+- Code was manually validated through local behavior checks.
+- Unnecessary AI-generated code was rejected to keep the codebase clear and original.
+- Final implementation decisions were made based on correctness, maintainability, and assignment requirements.

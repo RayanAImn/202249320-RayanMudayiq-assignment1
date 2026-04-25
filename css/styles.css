@@ -326,6 +326,8 @@ a {
   left: 80px;
   top: 380px;
   width: 605px;
+  min-height: 320px;
+  overflow: visible;
   z-index: 10;
   transition: all 0.3s;
 }
@@ -1329,6 +1331,8 @@ a {
     text-align: center;
     padding: 0 32px;
     box-sizing: border-box;
+    min-height: 300px;
+    overflow: visible;
   }
 
   .hero__name {
@@ -1418,6 +1422,8 @@ a {
     left: 24px;
     top: 240px;
     width: calc(100% - 48px);
+    min-height: 280px;
+    overflow: visible;
   }
 
   .hero__name {
@@ -1576,6 +1582,8 @@ a {
     text-align: center;
     padding: 0 24px;
     box-sizing: border-box;
+    min-height: 250px;
+    overflow: visible;
   }
 
   .hero__name {
@@ -1863,4 +1871,130 @@ a {
   display: flex;
   align-items: center;
   gap: 8px;
-}
+}
+
+/* ── Assignment 4 Innovation: Quick Actions Palette ── */
+.command-palette {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+}
+
+.command-palette[hidden] {
+  display: none;
+}
+
+.command-palette__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(2, 6, 23, 0.75);
+  cursor: pointer;
+}
+
+.command-palette__panel {
+  position: relative;
+  margin: 12vh auto 0;
+  width: min(620px, calc(100% - 32px));
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  background: rgba(2, 6, 23, 0.98);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+  padding: 18px;
+}
+
+.command-palette__title {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.command-palette__input {
+  width: 100%;
+  border: 1px solid #2d3748;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  padding: 12px 14px;
+  outline: none;
+}
+
+.command-palette__input:focus {
+  border-color: #00d9ff;
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2);
+}
+
+.command-palette__list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.command-palette__action {
+  width: 100%;
+  border: 1px solid #2d3748;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.55);
+  color: #e2e8f0;
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 11px 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.command-palette__action:hover,
+.command-palette__action:focus-visible {
+  border-color: #00d9ff;
+  background: rgba(0, 217, 255, 0.12);
+  outline: none;
+}
+
+.command-palette__hint {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.command-palette__empty {
+  padding: 10px 12px;
+  border: 1px dashed #334155;
+  border-radius: 8px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+body.theme-light .command-palette__backdrop {
+  background: rgba(15, 23, 42, 0.45);
+}
+
+body.theme-light .command-palette__panel {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: #cbd5e1;
+}
+
+body.theme-light .command-palette__input,
+body.theme-light .command-palette__action {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+body.theme-light .command-palette__title,
+body.theme-light .command-palette__hint,
+body.theme-light .command-palette__empty {
+  color: #334155;
+}
+
+@media (max-width: 768px) {
+  .command-palette__panel {
+    margin-top: 10vh;
+    width: calc(100% - 20px);
+    padding: 14px;
+  }
+}
