@@ -2,12 +2,15 @@
   "name": "202249320-rayanmudayiq-assignment1",
   "version": "1.0.0",
   "description": "This repository contains my final polished personal portfolio web application for Assignment 4.",
-  "main": "index.js",
+  "main": "server.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "convert-images": "node js/conver-images.js",
+    "test": "echo \"No automated tests configured\""
   },
   "repository": {
     "type": "git",
@@ -20,7 +23,7 @@
     "url": "https://github.com/RayanAImn/202249320-RayanMudayiq-assignment1/issues"
   },
   "homepage": "https://github.com/RayanAImn/202249320-RayanMudayiq-assignment1#readme",
-  "dependencies": {
+  "devDependencies": {
     "heic-convert": "^2.1.0",
     "sharp": "^0.34.5"
   }

@@ -556,6 +556,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // ══════════════════════════════════════════
   //  4.1 ASSIGNMENT 4 INNOVATION: QUICK ACTIONS
   // ══════════════════════════════════════════
+  // PRESENTATION MARKER:
+  // Show this section as your Assignment 4 innovation feature
+  // (keyboard shortcut + searchable quick navigation actions).
   function getQuickActions() {
     const nextTheme = document.body.classList.contains("theme-light") ? "dark" : "light";
 
@@ -705,6 +708,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterTabs = document.querySelectorAll(".filter-tab");
   const projectCards = document.querySelectorAll(".project-card");
 
+  // PRESENTATION MARKER:
+  // Show this function in your video to explain multi-step logic:
+  // category filter + level filter + year sorting.
   function applyProjectFiltersAndSort() {
     const activeFilterTab = document.querySelector(".filter-tab--active");
     const filter = activeFilterTab ? activeFilterTab.dataset.filter : "all";
@@ -760,6 +766,9 @@ document.addEventListener("DOMContentLoaded", () => {
   projectLevelSelect.addEventListener("change", applyProjectFiltersAndSort);
   applyProjectFiltersAndSort();
   
+  // PRESENTATION MARKER:
+  // Show this helper to explain resilience and graceful failure handling
+  // (request timeout + shared error strategy for external APIs).
   async function fetchJsonWithTimeout(url, timeoutMs = 8000) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
@@ -774,6 +783,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -- C. Public API (Fun Fact / Quote) --
+  // PRESENTATION MARKER:
+  // Show this to demonstrate API integration with fallback UI behavior.
   async function fetchRandomQuote() {
     const quoteText = document.getElementById("api-quote-text");
     try {
@@ -787,6 +798,8 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchRandomQuote();
 
   // -- D. External API: Live GitHub Repositories --
+  // PRESENTATION MARKER:
+  // Show this block to demonstrate dynamic rendering from GitHub API data.
   async function fetchGithubRepositories() {
     try {
       const repos = await fetchJsonWithTimeout("https://api.github.com/users/RayanAImn/repos?sort=updated&per_page=4");
