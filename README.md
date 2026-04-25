@@ -106,4 +106,4 @@ Detailed architecture, feature flow, implementation details, and testing checkli
 
 Add your live link here once deployed (GitHub Pages / Netlify / Vercel):
 
-- Live URL: `TBD`
+- Live URL: `https://rayanmudhayiq.vercel.app`
