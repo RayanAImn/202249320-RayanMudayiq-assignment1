@@ -14,3 +14,7 @@ Thumbs.db
 # Build artifacts
 .next/
 dist/
+
+# Large presentation exports
+presentation/*.mp4
+presentation/*.zip

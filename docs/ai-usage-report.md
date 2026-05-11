@@ -4,42 +4,44 @@
 
 | Tool | Use Cases in Assignment 4 |
 |---|---|
-| ChatGPT (Codex) | Requirement mapping from rubric, code quality review, implementing the quick-actions feature, documentation refinement |
-| GitHub Copilot | Inline code completion for repetitive JavaScript and CSS patterns |
+| ChatGPT (Codex) | Rubric mapping, quality review, debugging support, implementation assistance, and documentation refinement |
+| GitHub Copilot | Inline code completion for repetitive JavaScript/CSS patterns |
 
-### Where AI Was Used
+## Where AI Was Used
 
-- Interpreted Assignment 4 rubric requirements and mapped them to concrete repository tasks.
-- Reviewed project quality against documentation, structure, and feature expectations.
-- Helped implement a new innovation feature (quick-actions command palette with keyboard shortcut).
-- Improved API resilience with timeout-based fetch helper and fallback handling.
-- Updated README and technical documentation to align with submission criteria.
+- Interpreted rubric requirements and translated them into implementation/documentation tasks.
+- Reviewed frontend code quality and consistency.
+- Assisted with Assignment 4 innovation implementation (quick-actions command palette).
+- Assisted with API resilience improvement (timeout helper + fallback handling).
+- Assisted with deployment troubleshooting guidance (server start compatibility and 502 diagnosis path).
+- Assisted with image optimization workflow (`conver-images.js` updates and WebP conversion process).
 
 ## Benefits & Challenges
 
 ### Benefits
 
 - Faster requirement-to-implementation workflow.
-- Better coverage of edge cases (API timeout/failure paths).
-- More structured and rubric-aligned documentation.
+- Better edge-case coverage for API/network failures.
+- More structured and rubric-aligned documentation output.
 
 ### Challenges
 
-- Some AI suggestions were initially broader than assignment scope.
-- Required careful filtering to avoid unnecessary refactors.
-- Needed manual judgment for naming, UX wording, and final behavior decisions.
+- Some suggestions were broader than assignment scope and needed narrowing.
+- Required manual filtering to preserve project style and avoid over-refactoring.
+- Some deployment/debugging issues still required manual platform-side checks.
 
 ## Learning Outcomes
 
-- Improved ability to translate rubric language into technical deliverables.
-- Strengthened understanding of resilient API handling in frontend apps.
-- Practiced building keyboard-accessible interaction patterns.
-- Improved documentation quality by tying implementation details to grading criteria.
+- Improved ability to map assignment rubric language to concrete engineering deliverables.
+- Improved understanding of resilient API patterns in frontend apps.
+- Practiced keyboard-accessible interaction design.
+- Improved documentation quality and traceability for grading criteria.
+- Improved performance awareness through measurable image optimization outcomes.
 
 ## Responsible Use & Modifications
 
-- All AI output was reviewed before use.
-- AI-generated ideas were adapted to existing project architecture and style.
-- Code was manually validated through local behavior checks.
-- Unnecessary AI-generated code was rejected to keep the codebase clear and original.
-- Final implementation decisions were made based on correctness, maintainability, and assignment requirements.
+- All AI suggestions were reviewed before adoption.
+- AI output was modified to match existing architecture and style conventions.
+- Final code and documentation decisions were made manually based on correctness and maintainability.
+- Unnecessary or over-engineered AI output was rejected.
+- Academic integrity maintained by keeping understanding and ownership of final implementation.

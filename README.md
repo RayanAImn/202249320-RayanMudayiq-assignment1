@@ -1,15 +1,17 @@
 # Assignment 4 - Personal Web Application (Portfolio)
 
-This repository contains my final polished personal portfolio web application for Assignment 4.
+This repository contains my final Assignment 4 personal web application.
 
 ## Project Overview
 
-The project is a responsive, single-page portfolio website built with vanilla HTML, CSS, and JavaScript. It combines all previous assignment features (API usage, advanced DOM logic, state management) and adds an Assignment 4 innovation feature: a quick-actions command palette (`Ctrl/Cmd + K`) for fast navigation and theme control.
+The project is a responsive single-page portfolio website built with vanilla HTML, CSS, and JavaScript. It combines required course concepts (DOM logic, API integration, state management, validation, responsive design) in one polished app.
+
+Live website: `https://rayanmudhayiq.vercel.app`
 
 ## Key Features
 
 - Responsive single-page portfolio layout
-- Typing hero animation and scroll-driven reveal effects
+- Typing hero animation and scroll-driven effects
 - Project filtering by platform + level, plus year sorting
 - Live API integration:
   - Advice API (fun fact section)
@@ -24,14 +26,14 @@ The project is a responsive, single-page portfolio website built with vanilla HT
 
 ## Image Optimization (Grading Evidence)
 
-To optimize website size and loading performance, I used `js/conver-images.js` to convert portfolio images from PNG to WebP.
+I used `js/conver-images.js` to convert portfolio images from PNG to WebP.
 
 - Converted files: `5`
 - Total size before: `2.33 MB`
 - Total size after: `216.1 KB`
 - Overall reduction: `91%`
 
-The website now serves `.webp` files directly in `index.html`.
+The website serves `.webp` assets directly in `index.html`.
 
 ## Assignment 4 Requirement Mapping
 
@@ -40,6 +42,7 @@ The website now serves `.webp` files directly in `index.html`.
 - Innovation: quick-actions command palette
 - AI integration: documented in `docs/ai-usage-report.md`
 - Documentation: README + technical documentation included
+- Deployment: live and publicly accessible on Vercel
 
 ## Run Locally
 
@@ -47,30 +50,32 @@ The website now serves `.webp` files directly in `index.html`.
 
 ```bash
 git clone <your-repo-url>
-cd 202249320-RayanMudayiq-assignment1
+cd <repo-folder>
 ```
 
-2. Open `index.html` directly in a modern browser.
+2. Open directly:
 
-3. Optional local server:
+- Open `index.html` in a modern browser.
+
+3. Or run local server (recommended):
 
 ```bash
-npx -y http-server . -p 8080
+npm install
+npm run dev
 ```
 
 Then open `http://localhost:8080`.
 
-Optional: rerun image optimization
+4. Optional image optimization rerun:
 
 ```bash
-npm install
-node js/conver-images.js
+npm run convert-images
 ```
 
 ## Project Structure
 
 ```text
-202249320-RayanMudayiq-assignment1/
+id-name-assignment4/
 ├── README.md
 ├── index.html
 ├── css/
@@ -85,25 +90,26 @@ node js/conver-images.js
 │   └── technical-documentation.md
 ├── presentation/
 │   ├── README.md
-│   ├── slides.pdf            (manual deliverable)
-│   └── demo-video.mp4        (manual deliverable)
+│   ├── slides.pdf            (required manual deliverable)
+│   └── demo-video.mp4        (required manual deliverable)
+├── server.js
+├── package.json
+├── package-lock.json
 └── .gitignore
 ```
 
-## AI Tools Summary
+## Documentation
 
-AI tools were used for targeted engineering assistance (debugging, quality review, documentation refinement, and implementation support). Full details, modifications, and responsible-use notes are documented in:
+- AI report: `docs/ai-usage-report.md`
+- Technical documentation: `docs/technical-documentation.md`
 
-- `docs/ai-usage-report.md`
+## Final Submission Notes
 
-## Technical Documentation
+Before Blackboard submission, ensure:
 
-Detailed architecture, feature flow, implementation details, and testing checklist are in:
-
-- `docs/technical-documentation.md`
-
-## Optional Deployment
-
-Add your live link here once deployed (GitHub Pages / Netlify / Vercel):
-
-- Live URL: `https://rayanmudhayiq.vercel.app`
+- Repository is public and named in Assignment 4 format (`id-name-assignment4`)
+- `presentation/slides.pdf` exists
+- `presentation/demo-video.mp4` exists and is within size limits (GitHub limit is 100 MB per file)
+- Blackboard text includes:
+  - repository link
+  - live website link (`https://rayanmudhayiq.vercel.app`)

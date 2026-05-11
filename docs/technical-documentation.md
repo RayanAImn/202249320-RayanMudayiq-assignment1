@@ -2,25 +2,27 @@
 
 ## 1. Project Summary
 
-This project is a single-page personal portfolio web application built with vanilla HTML, CSS, and JavaScript. It is fully client-side and requires no build system.
+This project is a single-page personal portfolio web application built with vanilla HTML, CSS, and JavaScript.
 
-Assignment 4 objective: deliver a polished, responsive, presentation-ready application that demonstrates all course concepts and responsible AI usage.
+Assignment 4 objective: deliver a complete, responsive, polished application that demonstrates technical implementation quality, clear documentation, AI-assisted workflow transparency, and presentation readiness.
 
 ## 2. Architecture
 
 ### 2.1 Runtime Model
 
-- Static frontend, browser-only runtime
+- Frontend-focused application with browser-side interactions
 - Event-driven behavior via DOM listeners
-- No third-party JS framework
-- Local state stored in memory and `localStorage`
+- Local state managed in memory and `localStorage`
+- Deployed as static site with lightweight Node static server support (`server.js`) for host compatibility
 
 ### 2.2 File Responsibilities
 
-- `index.html`: semantic page structure and UI sections
-- `css/styles.css`: theme variables, layout, responsive styles, animations
-- `js/script.js`: interactions, state logic, API calls, validation, toasts
-- `docs/`: AI report and technical documentation
+- `index.html`: semantic page structure and content
+- `css/styles.css`: theme tokens, layout, responsive rules, animations
+- `js/script.js`: interactions, state logic, API calls, validation, toasts, innovation features
+- `js/conver-images.js`: image conversion utility (PNG/JPG/HEIC -> WebP)
+- `server.js`: static serving fallback for environments expecting Node `start`
+- `docs/`: AI usage report and technical documentation
 
 ## 3. Core Features
 
@@ -28,116 +30,116 @@ Assignment 4 objective: deliver a polished, responsive, presentation-ready appli
 
 - Typing hero intro (name + description)
 - Scroll-driven reveal/parallax effects
-- IDE-themed sections and animated visual background
-- Responsive navbar with hamburger menu
+- IDE-style layout and animated background
+- Responsive navigation with mobile hamburger menu
 
 ### 3.2 Project Logic
 
 - Category filtering (`all`, `web`, `mobile`)
 - Level filtering (`all`, `beginner`, `advanced`)
 - Sorting by year (`newest`, `oldest`)
-- Combined multi-step logic applied to the same card dataset
+- Combined filter/sort logic applied to one project dataset
 
 ### 3.3 API Integrations
 
 - Advice API: `https://api.adviceslip.com/advice`
 - GitHub API: `https://api.github.com/users/RayanAImn/repos?sort=updated&per_page=4`
-- Graceful fallback messages on request failure
-- Shared timeout-based fetch helper for resilience
+- Graceful fallback text on request failures
+- Shared timeout-based helper for resilient fetch behavior
 
 ### 3.4 Form + State
 
-- Contact form validation (name/email/message)
-- Inline error messages and styling
-- Draft autosave to `localStorage`
-- Toast notifications for success/error outcomes
+- Contact validation for name/email/message
+- Inline error messaging
+- Draft autosave via `localStorage`
+- Toast notifications for success/error
 - Theme persistence (`portfolioTheme`) in `localStorage`
-- Session timer (`MM:SS`) updated every second
+- Visitor timer (`MM:SS`) updated every second
 
 ### 3.5 Assignment 4 Innovation
 
 Quick Actions Palette:
 
-- Trigger: `Ctrl + K` (Windows/Linux) or `Cmd + K` (macOS)
-- Also accessible from navbar button
-- Supports filtered action search
-- Actions include:
-  - Navigate to Home/About/Projects/Contact
-  - Toggle theme
-- `Enter` executes first visible action, `Esc` closes palette
+- Trigger: `Ctrl + K` / `Cmd + K`
+- Searchable quick action menu
+- Fast section navigation (Home/About/Projects/Contact)
+- Theme toggle action
+- Keyboard controls (`Enter` run action, `Esc` close)
 
 ## 4. Error Handling and Resilience
 
-- API requests use try/catch and user-friendly fallback text
-- Network calls use timeout control to avoid hanging fetches
-- Form submit blocks invalid payloads and provides explicit field errors
+- API calls wrapped with try/catch and user-facing fallback states
+- Request timeout control to prevent long-hanging external calls
+- Validation blocks invalid form submission and gives explicit field-level errors
 
 ## 5. Accessibility Notes
 
 Implemented:
 
-- Semantic section structure
-- Input labels and `aria-label` for key controls
-- Keyboard navigation support
-- Keyboard shortcut support for quick actions
+- Semantic structure and form labels
+- `aria-label` attributes for key controls
+- Keyboard accessibility for navigation and quick actions
 
 Recommended future improvements:
 
-- Add `aria-live` announcements for toast and API status updates
-- Expand keyboard focus management for command palette action navigation
+- Add `aria-live` announcements for toast/API status updates
+- Improve command palette focus loop and arrow-key navigation
 
 ## 6. Performance Notes
 
 Implemented:
 
 - Cached DOM references
-- Scroll handler throttled via `requestAnimationFrame`
-- Background code typing loop stops automatically when complete
-- Transform/opacity-driven animations for smoother rendering
+- Scroll handling throttled with `requestAnimationFrame`
+- Background code typing interval stops once complete
+- Transform/opacity-based animations for smoother rendering
+- Image optimization to WebP:
+  - before: `2.33 MB`
+  - after: `216.1 KB`
+  - reduction: `91%`
 
-Potential future improvements:
+## 7. Deployment Status
 
-- Lazy-load media if image count grows
-- Further reduce inline style rules by consolidating style ownership in CSS files
+- Live deployment URL: `https://rayanmudhayiq.vercel.app`
+- HTTP status check: `200 OK` (verified on April 25, 2026)
 
-## 7. Testing Checklist
+## 8. Testing Checklist
 
 Manual checks completed/recommended:
 
-- Hero typing animation and glow sequence
-- Scroll reveals and active navbar states
-- Project filter/sort/level combinations
+- Hero typing and visibility behavior
+- Scroll reveals and active navbar state
+- Filter + level + sort combinations in Projects section
 - Advice API success/failure behavior
 - GitHub API success/failure behavior
-- Contact validation and toast messaging
-- Draft restoration after page refresh
+- Contact validation, autosave, and toast outputs
 - Theme persistence after reload
-- Timer updates correctly
-- Quick actions palette open/filter/run/close behavior
+- Session timer updates
+- Quick actions open/filter/run/close behavior
 - Mobile menu open/close behavior
-- Responsive layout on desktop/tablet/mobile widths
+- Responsive layout checks (desktop/tablet/mobile)
 
-## 8. Known Limitations
+## 9. Known Limitations
 
-- Contact form is UI-only (no backend submission endpoint)
-- External API availability is not guaranteed
-- Heavy visual effects may impact low-end mobile battery/performance
+- Contact form is UI-only (no backend submit endpoint)
+- External APIs may fail or rate-limit depending on network/service state
+- Heavy visual effects may affect low-end mobile battery/performance
 
-## 9. Presentation Deep-Dive Notes (for 5–7 min demo)
+## 10. Presentation Deep-Dive Notes (5–7 min)
 
 Resolved and implemented:
 
-- Combined project filter/sort/level logic
-- API fallback UX for unstable networks
-- Persistent UI state with `localStorage`
+- Combined filter/sort/level project logic
+- API resilience with timeout + fallback UI
+- Persistent UI state and quick keyboard actions
 
 Unresolved/not implemented:
 
-- Backend-based contact message delivery
-- Full automated cross-browser test suite
+- Backend contact message delivery
+- Full automated test suite and CI quality gates
 
 Planned future work:
 
-- Backend API for contact submissions
-- CI checks (lint + formatting + static analysis)
-- Accessibility audit and improvements
+- Add backend form endpoint
+- Add lint/test pipeline
+- Expand accessibility testing and keyboard support
